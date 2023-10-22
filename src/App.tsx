@@ -93,7 +93,7 @@ function App() {
           <div>
             <header className='usernameContainer'>
               <h3 className='name'>{userGithub?.name}</h3>
-              <h3 className='userJoined'>Joined 06 May 2023</h3>
+              <h3 className='userJoined'>{userGithub?.created_at}</h3>
             </header>
 
 
