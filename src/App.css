@@ -1,5 +1,22 @@
 :root {
-    background-color: #141D2F;
+    --bg-color: #FFF;
+    --card-color: #F5F7FF;
+    --text-primarycolor: #000;
+    --text-secondarycolor: #4B6A9B;
+    --button-color: #0079FF;
+    --button-hover-color: #60ABFF;
+}
+
+.darkMode {
+    --bg-color: #141D2F;
+    --card-color: #1E2A47;
+    --text-primarycolor: #FFF;
+    --text-secondarycolor: #FFF;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-secondarycolor);
 }
 
 * {
@@ -7,7 +24,6 @@
     padding: 0;
     box-sizing: border-box;
     font-family: "Space Mono", monospace;
-    color: #FFF;
 }
 
 main {
@@ -26,7 +42,7 @@ header {
 }
 
 h1 {
-    color: #FFF;
+    color: var(--text-secondarycolor);
 }
 
 input {
@@ -41,35 +57,42 @@ input:focus {
 input[type="text"] {
     font-size: 1.1rem;
     width: 100%;
-    color: #FFF;
+    color: var(--text-primarycolor);
 }
 
 input[type="text"]::placeholder {
-    color: #FFF;
+    color: var(--text-primarycolor);
 }
-
 
 .buttonThemeMode {
     display: flex;
     align-items: center;
     gap: 1rem;
     padding: 0.4rem 0.8rem;
-    background-color: transparent;
     border-radius: 15px;
     cursor: pointer;
+    background-color: var(--button-color);
 }
 
 .buttonThemeMode:hover {
-    background-color: #0079ff;
+    background-color: var(--button-hover-color);
 }
 
-.buttonThemeMode button {
+.buttonThemeMode p {
     background-color: transparent;
     border: none;
     color: #FFF;
     letter-spacing: 2.5px;
     font-weight: bold;
     text-transform: uppercase;
+}
+
+.buttonThemeMode.dark {
+    background-color: transparent;
+}
+
+.buttonThemeMode.dark:hover {
+    background-color: var(--button-color);
 }
 
 
@@ -90,12 +113,11 @@ button {
 
 .searchButton:hover {
     background-color: #60abff;
-    ;
 }
 
 .inputContainer {
     width: 100%;
-    background-color: #1E2A47;
+    background-color: var(--card-color);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -114,7 +136,7 @@ button {
 
 
 .userCard {
-    background-color: #1E2A47;
+    background-color: var(--card-color);
     width: 100%;
     display: flex;
     align-items: flex-start;
@@ -139,13 +161,13 @@ button {
 .name {
     font-size: 26px;
     font-weight: bold;
-    color: #FFF;
+    color: var(--text-primarycolor);
 }
 
 .userJoined {
     font-size: 15px;
     font-weight: 400;
-    color: #FFF;
+    color: var(--text-primarycolor);
 }
 
 .userName {
@@ -160,7 +182,7 @@ button {
 }
 
 .userInteractions {
-    background-color: #141D2F;
+    background-color: var(--bg-color);
     display: flex;
     justify-content: space-between;
     align-items: center;

@@ -1,6 +1,8 @@
 import { BaseSyntheticEvent, useEffect, useState } from 'react'
 import './App.css'
 import { Search, Location, Link, Sun, Twitter, Building } from './assets/Icons'
+import { useTheme } from './context/ThemeContext'
+import { format, set } from 'date-fns'
 
 type UserGitHub = {
   login: string,
@@ -47,6 +49,9 @@ function App() {
 
   const [userGithub, setUserGithub] = useState<UserGitHub>()
 
+  const { isDarkMode, setIsDarkMode } = useTheme()
+
+  const [userJoined, setUserJoined] = useState<string>('')
 
   useEffect(() => {
     onSearch('octocat')
@@ -58,6 +63,7 @@ function App() {
       return response.json()
     }).then(data => {
       setUserGithub(data)
+      setUserJoined(format(new Date(data.created_at), 'dd MMM yyyy'))
     })
   }
 
@@ -70,11 +76,15 @@ function App() {
     <>
       <main>
         <header>
-          <h1 className='title'>devfinder</h1>
-          <div className='buttonThemeMode'>
-            <button>Light</button>
+          <h1>devfinder</h1>
+          <button className={isDarkMode ? 'buttonThemeMode dark' : 'buttonThemeMode'}
+            onClick={() => {
+              document.body.classList.toggle('darkMode')
+              setIsDarkMode(!isDarkMode)
+            }}>
+            <p>Light</p>
             <Sun />
-          </div>
+          </button>
         </header>
 
         <div className='inputContainer'>
@@ -93,7 +103,7 @@ function App() {
           <div>
             <header className='usernameContainer'>
               <h3 className='name'>{userGithub?.name}</h3>
-              <h3 className='userJoined'>{userGithub?.created_at}</h3>
+              <h3 className='userJoined'>Joined {userJoined}</h3>
             </header>
 
 
@@ -119,22 +129,24 @@ function App() {
 
             <footer>
               <div>
-                <Location color={!userGithub?.location ? '#C6C6C6' : 'currentColor'} />
+                <Location color={isDarkMode ? !userGithub?.location ? '#C6C6C6' : 'currentColor' : !userGithub?.location ? '#94aed6' : 'currentColor'} />
                 <p style={!userGithub?.location ? { opacity: '0.5' } : {}}>{userGithub?.location ? userGithub.location : notAvailable}</p>
               </div>
 
               <div>
-                <Link color={!userGithub?.blog ? '#C6C6C6' : 'currentColor'} />
+                <Link color={isDarkMode ? !userGithub?.blog ? '#C6C6C6' : 'currentColor' : !userGithub?.blog ? '#94aed6' : 'currentColor'} />
                 <p style={!userGithub?.blog ? { opacity: '0.5' } : {}}>{userGithub?.blog ? userGithub.blog : notAvailable}</p>
               </div>
 
               <div>
-                <Twitter color={!userGithub?.twitter_username ? '#C6C6C6' : 'currentColor'} />
+
+                <Twitter color={isDarkMode ? !userGithub?.twitter_username ? '#C6C6C6' : 'currentColor' : !userGithub?.twitter_username ? '#94aed6' : 'currentColor'}
+                />
                 <p style={!userGithub?.twitter_username ? { opacity: '0.5' } : {}}>{userGithub?.twitter_username ? userGithub.twitter_username : notAvailable}</p>
               </div>
 
               <div>
-                <Building color={!userGithub?.company ? '#C6C6C6' : 'currentColor'} />
+                <Building color={isDarkMode ? !userGithub?.company ? '#C6C6C6' : 'currentColor' : !userGithub?.company ? '#94aed6' : 'currentColor'} />
                 <p style={!userGithub?.company ? { opacity: '0.5' } : {}}>{userGithub?.company ? userGithub.company : notAvailable}</p>
               </div>
 
