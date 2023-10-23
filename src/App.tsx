@@ -2,7 +2,7 @@ import { BaseSyntheticEvent, useEffect, useState } from 'react'
 import './App.css'
 import { Search, Location, Link, Sun, Twitter, Building } from './assets/Icons'
 import { useTheme } from './context/ThemeContext'
-import { format, set } from 'date-fns'
+import { format } from 'date-fns'
 
 type UserGitHub = {
   login: string,
